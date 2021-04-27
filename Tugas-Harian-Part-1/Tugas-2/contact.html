@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="public/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <input type="checkbox" id="check">
+        <label for="check">
+          <i class="fas fa-bars" id="btn"></i>
+          <i class="fas fa-times" id="cancel"></i>
+        </label>
+        <img id="logo" src="./public/css/img/logo.png" width="200px" />
+        <nav>
+          <ul>
+            <li><a href="index.html"><li>Home</li></a></li>
+            <li><a href="about.html"><li>About</li></a></li> 
+            <li><a href="contact.html"><li>Contact</li></a></li>
+          </ul>
+        </nav>
+    </header>
+    <section> 
+      <div id="article-list">
+        <div>
+            <h2><center>Hubungi Kami</center></h2><br>
+          <p>Kantor : dijalan belum jadi </p>
+          <p>No Telepon : 0858-XXXX-XXXX</p> 
+          <p>Email : emai@gmail.com</p>
+        </div>
+        <div>
+            <h2><center>Kirimkan Pesan</center></h2><br>
+            <form action="index.html" method="post" enctype="multipart/form-data">
+                <table border="0" cellspacing="10" width="800" align="center">
+                <tbody>
+                <tr>
+                    <td>Nama </td>
+                    <td><input type="text" name="nama" size="20" maxlength="10"/></td>
+                </tr>
+                <tr>
+                    <td>EMail</td>
+                    <td><input type="text" name="stok" placeholder="Stok Produk" size="20" maxlength="10"/></td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <td>
+                        <input type="radio" name="jenis_kelamin" value="Laki-laki"> Laki-laki<br>
+                        <input type="radio" name="jenis_kelamin" value="Perempuan"> Perempuan<br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Pesan anda </td>
+                    <td><textarea name="alamat" rows="3" cols="50"/></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><button type="submit" name="simpan">Kirim</button</td>
+                </tr>
+            </tbody>
+            </table>
+            </form>
+            <a href="index.html">Kembali Ke Index</a>
+          </div>
+      </div>
+    </section> 
+    <footer>
+      <h5>copyright &copy; 2020 by Sanbercode</h5>
+    </footer>
+</body>
+</html>
