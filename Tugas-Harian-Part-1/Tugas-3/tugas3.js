@@ -1,4 +1,5 @@
 // Soal pertama 
+//... jawaban soal 1
 
 var kataPertama = "saya ";
 var kataKedua = "senang ";
@@ -8,6 +9,7 @@ var kataKeempat = "javascript ";
 console.log(kataPertama.concat(kataKedua, kataKetiga, kataKeempat));
 
 // Soal Kedua
+//... jawaban soal 2
 var panjangPersegiPanjang = "8";
 var lebarPersegiPanjang = "5";
 
@@ -21,6 +23,7 @@ var luasSegitiga = (parseInt(alasSegitiga) * parseInt(tinggiSegitiga))/2;
 console.log(luasSegitiga);
 
 //Soal ketiga
+//... jawaban soal 3
 var sentences= 'wah javascript itu keren sekali'; 
 
 var firstWord= sentences.substring(0, 3); 
@@ -36,6 +39,7 @@ console.log('Kata Keempat: ' + fourthWord);
 console.log('Kata Kelima: ' + fifthWord);
 
 //Soal keempat
+//... jawaban soal 4
 var nilaiJohn = 80;
 
 if (nilaiJohn >= 80 ) { 
@@ -75,6 +79,7 @@ if (nilaiDoe >= 80 ) {
 
 
 //Soal kelima 
+//... jawaban soal 5
 var tanggal = 17;
 var bulan = 12;
 var tahun = 2002;
@@ -95,3 +100,6 @@ switch(bulan) {
 }
 
 console.log(tanggal + ' ' + bulan + ' ' + tahun);
+
+
+
