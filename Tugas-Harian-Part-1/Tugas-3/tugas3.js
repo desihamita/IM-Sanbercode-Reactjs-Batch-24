@@ -6,7 +6,12 @@ var kataKedua = "senang ";
 var kataKetiga = "belajar ";
 var kataKeempat = "javascript ";
 
-console.log(kataPertama.concat(kataKedua, kataKetiga, kataKeempat));
+var soal1 = kataPertama + " " + (kataKedua[0].toUpperCase()+ kataKedua.slice(1))
+            + " " + kataKetiga.slice(0,kataKetiga.length-1) + kataKetiga[kataKetiga.length-1].toUpperCase()
+            + " " + kataKeempat.toUpperCase()
+
+console.log(soal1)
+
 
 // Soal Kedua
 //... jawaban soal 2
