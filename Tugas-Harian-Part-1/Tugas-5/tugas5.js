@@ -43,16 +43,16 @@ console.log(perkenalan);
 
 // // //Soal Ketiga
 // // //Jawaban Soal Ketiga 
-var arrayDaftarPeserta = ["Desi Sihamita", "Perempuan", "Nonton Drakor", 2002];
-var ObjectDataPeserta = {
-    Nama : "Desi sihamita",
-    Jenis_Kelamin : "Perempuan",
-    Hobby : "Nonton drakor",
-    Tahun_lahir : 2002
-}
+console.log("----SOAL 3----")
 
-console.log("\n--- Jawaban Soal ketiga ---");
-console.log(ObjectDataPeserta);
+var arrayDaftarPeserta = ["John Doe", "laki-laki", "baca buku" , 1992]
+
+var objectDataPeserta = {}
+var arrayProperty = ["nama", "jenisKelamin", "hobi", "tahunLahir"]
+arrayDaftarPeserta.forEach(function(value, index){
+  objectDataPeserta[arrayProperty[index]] = value
+})
+console.log(objectDataPeserta)
 
 
 // //Soal Keempat
@@ -74,20 +74,21 @@ var Buah = [
 //Soal kelima
 //jawaban soal kelima 
 function tambahDataFilm(nama, durasi, genre, tahun){
-    var DataFilm = {};
-        DataFilm.nama = nama;
-        DataFilm.durasi = durasi;
-        DataFilm.genre = genre;
-        DataFilm.tahun = tahun;
-    return DataFilm;
+    var ObjectFilm = {
+        nama: nama,
+        durasi: durasi,
+        genre: genre,
+        tahun: tahun
+    };
+    DataFilm.push(ObjectFilm)
 }
 
 var DataFilm = [];
 
-DataFilm.push(tambahDataFilm("LOTR", "2 jam", "action", "1999"));
-DataFilm.push(tambahDataFilm("avenger", "2 jam", "action", "2019"));
-DataFilm.push(tambahDataFilm("spiderman", "2 jam", "action", "2004"));
-DataFilm.push(tambahDataFilm("juon", "2 jam", "horror", "2004"));
+tambahDataFilm("LOTR", "2 jam", "action", "1999");
+tambahDataFilm("avenger", "2 jam", "action", "2019");
+tambahDataFilm("spiderman", "2 jam", "action", "2004");
+tambahDataFilm("juon", "2 jam", "horror", "2004");
 
 console .log("\n---Jawaban soal kelima ---")
 console.log(DataFilm);
