@@ -2,16 +2,19 @@
 //Jawaban soal pertama
 console.log("--- Soal Pertmama --\n")
 
-const LuasLingkaran = (r, phi = 22/7) => {
-    return parseInt(phi * r * r);
+const LuasLingkaran = (r) => {
+    const phi = r % 7 === 0 ? 22/7 : 3.14
+    return phi * r * r
 }
-const KelilingLingkaran = (r, phi = 22/7) => {
-    return parseInt(2 * phi * r);
+const KelilingLingkaran = (r) => {
+    const phi = r % 7 === 0 ? 22/7 : 3.14
+    return 2 * phi * r
 }
 
-console.log(LuasLingkaran(7))
-console.log(KelilingLingkaran(7))
-
+let JariJari = 7
+console.log(LuasLingkaran(JariJari))
+console.log(KelilingLingkaran(JariJari))
+console.log()
 
 
 //Soal kedua
@@ -19,12 +22,19 @@ console.log(KelilingLingkaran(7))
 console.log("\n--- Soal Kedua ---\n")
 const introduce = (...rest) =>{ 
     let [nama, usia,jenisKelamin, pekerjaan] = rest
-    return `pak ${nama} adalah seorang ${pekerjaan} yang berusia ${usia} tahun`
+    let prefixName = "Undefined"
+    if (jenisKelamin === "Laki-Laki"){
+      prefixName = "Pak"
+    }else if(jenisKelamin === "Perempuan"){
+      prefixName = "Bu"
+    }
+  
+    return `${prefixName} ${nama} adalah seorang ${pekerjaan} yang berusia ${usia} tahun`
 } 
 
-const perkenalan = introduce("John", "30", "Laki-Laki", "penulis")
+const perkenalan = introduce("John", "30", "Perempuan", "penulis")
 console.log(perkenalan)
-
+console.log()
 
 
 //Soal ketiga
@@ -34,7 +44,7 @@ const newFunction = (firstName, lastName) => {
     return {
       firstName,
       lastName,
-      fullName () {
+      fullName : () => {
         console.log(firstName + " " + lastName)
       }
     }
@@ -43,7 +53,7 @@ const newFunction = (firstName, lastName) => {
 console.log(newFunction("John", "Doe").firstName)
 console.log(newFunction("Richard", "Roe").lastName)
 newFunction("William", "Imoh").fullName()
-
+console.log()
 
 
 //soal keempat
@@ -59,6 +69,7 @@ let phone = {
 const {name: phoneName, brand : phoneBrand, year, colors:[colorBronze,colorWhite, colorBlack]} = phone 
  
  console.log(phoneBrand, phoneName, year, colorBlack, colorBronze) 
+ console.log()
 
 
  //Soal Kelima 
@@ -78,8 +89,7 @@ const {name: phoneName, brand : phoneBrand, year, colors:[colorBronze,colorWhite
  }
 
 let CombinedArray = {
-    nama: "pemograman dasar",
-    jumlahHalaman: 172,
+    ...buku,
     warnaSampul:["hitam", ...warna],
     ...dataBukuTambahan,
 } 
