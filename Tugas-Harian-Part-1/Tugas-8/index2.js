@@ -22,3 +22,16 @@ const execute = (time, books,i) => {
     }
 }
 execute(10000, books,0)
+
+// const execute = (time, index, booksQueue)=>{
+//     readBooksPromise(time, books[index]).then((remainingTime)=>{
+//         booksQueue = booksQueue - 1
+//         if (booksQueue > 0){
+//             execute(remainingTime, index+1, booksQueue)
+//         }
+//     }).catch((err)=>{
+//         console.log(err)
+//     })
+// }
+
+// execute(10000, 0, books.length)
