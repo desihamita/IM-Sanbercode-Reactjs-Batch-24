@@ -41,7 +41,7 @@ input{
     border: 1;
     border-radius: 35px;
 }
-.tabel td,
+/* .tabel td,
 .tabel th {
   border: 2px solid #ddd;
   padding: 10px;
@@ -70,4 +70,4 @@ table.tabel {
   color: #000;
   border-collapse: collapse;
   border: 5px solid white;
-}
+} */

@@ -1,58 +1,42 @@
 import React, {Component} from "react" 
-import '../css/style.css'
+import ItemBuah from "./ItemBuah"
 
-
-
-class Table extends Component {
-  constructor(props) {
-    super(props); 
-    this.state = {
-      dataHargaBuah: [
+class tableBuah extends Component {
+    render (){
+      let dataHargaBuah = [
         {nama: "Semangka", harga: 10000, berat: 1000},
         {nama: "Anggur", harga: 40000, berat: 500},
         {nama: "Strawberry", harga: 30000, berat: 400},
         {nama: "Jeruk", harga: 30000, berat: 1000},
         {nama: "Mangga", harga: 30000, berat: 500}
-      ],
-    };
-  }
-
-  renderTableData() {
-    return this.state.dataHargaBuah.map((student, index) => {
-      const { nama, harga, berat } = student; //destructuring
-      return (
-        <tr key={index}>
-          <td>{nama}</td>
-          <td>{harga}</td>
-          <td>{berat} kg</td>
-        </tr>
-      );
-    });
-  }
-
-  renderTableHeader() {
-    let header = Object.keys(this.state.dataHargaBuah[0]);
-    return header.map((key, index) => {
-      return <th key={index}>{key.toUpperCase()}</th>;
-    });
-  }
-
-  render() {
+      ]
+    
     return (
-      <div>
-        <div className="Container">
-          <h1 className="title">Tabel Data Buah</h1>
-          <table className="tabel">
-            <tbody>
-              <tr>{this.renderTableHeader()}</tr>
-              {this.renderTableData()}
+      <>
+        <div className="Container" style={{padding:"20px"}}>
+          <h1 style={{textAlign : "center"}}>Daftar Harga Buah </h1>
+          <table style={{border:"1px solid", width:"40%", margin:"0 auto"}}>
+            <thead style={{background:"grey"}}>
+              <tr>
+                <td>Nama</td>
+                <td>Harga</td>
+                <td>Berat</td>
+              </tr>
+            </thead>
+            <tbody style={{background:"coral"}}>
+              {dataHargaBuah.map((el, index) => {
+                return (
+                  <>
+                    <ItemBuah item={el} key={index} />
+                  </>
+                )
+              })}
             </tbody>
           </table>
         </div>
-      </div>
-    );
+      </>
+    )
   }
 }
 
-export default Table;
-
+export default tableBuah

@@ -1,9 +1,8 @@
 import logo from './logo.svg';
 import React from 'react'
 import IntroReactJS from './Tugas-9/tugas9'
-import UserInfo from './Tugas-10/tugas10'
+import TableBuah from './Tugas-10/tugas10'
 import './App.css';
-import './css/style.css';
 
 function App() {
   return (
@@ -11,7 +10,7 @@ function App() {
       <>
         <IntroReactJS/>
         {/* <HelloWorld/> */}
-        <UserInfo/>
+        <TableBuah />
       </>
 
     </div>
