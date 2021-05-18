@@ -8,7 +8,6 @@ class Clock extends Component {
         showTime: true,
         date : new Date()
     }
-    this.hideTimer = this.hideTimer.bind(this)
   }
 
   componentDidMount(){
@@ -26,8 +25,10 @@ class Clock extends Component {
   }
 
   componentDidUpdate(){
-    if (this.state.time === 0 ){
-      this.componentWillUnmount()
+    if (this.state.showTime === true){
+      if (this.state.time <= 0){
+        this.setState({showTime: false})
+      }
     }
   }
 
@@ -38,11 +39,6 @@ class Clock extends Component {
       });
   }  
 
-  hideTimer(){
-    this.setState({
-      showTime: !this.state.showTime
-    });
-  }
 
   render() {
     return(
