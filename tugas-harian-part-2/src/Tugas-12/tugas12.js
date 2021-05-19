@@ -18,11 +18,9 @@ export default class Lists extends Component{
       currentIndex: -1
       
     }
-
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleEdit = this.handleEdit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleChange = (event) => {
@@ -148,7 +146,7 @@ export default class Lists extends Component{
               Berat Total (per gram)
             </div>    
             <div className="col-75">
-              <input type="number" name="inputBerat" onChange={this.handleChange} value={this.state.inputBerat} required max="2000" />
+              <input type="number" name="inputBerat" onChange={this.handleChange} value={this.state.inputBerat} required min="2000" />
             </div> 
           </div>
           <div className="row">   
