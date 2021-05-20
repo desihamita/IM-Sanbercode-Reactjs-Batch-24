@@ -3,88 +3,81 @@ import axios from "axios"
 import '../css/table.css'
 
 const Student= () =>{
-  const [Student, setStudent] =  useState([])
-  const [inputValue, setInputValue] =  useState({
-      name : "",
-      course : "",
-      score : ""
+  const [scores, setScores] = useState([])
+  const [fetch, setFetch] = useState(true)
+  const [input, setInput] = useState({
+    name : "",
+    course : "",
+    score : 0
   })
-  const [currentId, setCurrentId] =  useState(null)
-
-  useEffect( () => {
-    const fetchData = async () => {
+  
+  useEffect( ( ) => {
+    const fetchData = async ( ) => {
       const result = await axios.get(`http://backendexample.sanbercloud.com/api/student-scores`)
-        setStudent(result.data.map(x=>{ 
-            return {
-                id: x.id, 
-                name: x.name,
-                mataKuliah: x.course,
-                nilai: x.score,
-            } 
-        }))
+
+      setScores(result.data.map(el => {
+        const {id, name, course, score} = el
+        return {id, name, course, score}
+      }))
     }
-      
-    fetchData()
-  }, [])
+    if(fetch){
+      fetchData()
+      setFetch(false)
+    }
+  },[fetch])
 
   const handleChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
-    setInputValue({
-      ...inputValue,
+    setInput({
+      ...input,
       [name]: value
     });
   }
 
   const handleSubmit = (event) =>{
     event.preventDefault()
+    const {name, course, score,  currentId} = input
+
     if (currentId === null){
       // untuk create data baru
-      axios.post(`http://backendexample.sanbercloud.com/api/student-scores`, inputValue)
-      .then(res => {
-          let data = res.data
-          setStudent([...Student, {
-              id: data.id, 
-              name: data.name, 
-              mataKuliah: data.course, 
-              nilai: data.score 
-            }])
+      axios.post(`http://backendexample.sanbercloud.com/api/student-scores`, {name, course, score, currentId})
+      .then((res) => {
+          const data = res.data
+          //set score with local data
+          setScores([...scores, {id: data.id, name, course, score}])
       })
     }else{
-        axios.put(`http://backendexample.sanbercloud.com/api/student-scores/${currentId}`, inputValue)
+        axios.put(`http://backendexample.sanbercloud.com/api/student-scores/${currentId}`, {name, course, score, currentId})
         .then(() => {
-            let newStudent = Student.find(el=> el.id === currentId)
-            newStudent.name= inputValue.name
-            newStudent.mataKuliah = inputValue.course
-            newStudent.nilai = inputValue.score
-            setStudent([...Student])
+            //trigger  fetch data 
+            setFetch(true)
         })      
     }
-
-    setInputValue("")
-    setCurrentId(null)
-  }
-
-  const handleEdit = (event) =>{
-    let ID_STUDENt = event.target.value
-    axios.get(`http://backendexample.sanbercloud.com/api/student-scores/${ID_STUDENt}`)
-    .then(res => {
-      let data = res.data
-      setInputValue({
-        name: data.name, 
-        course: data.course, 
-        score: data.score
-      })
-      setCurrentId(data.id)
+    setInput({
+      name: "",
+      course: "",
+      score: 0,
+      currentId: null
     })
   }
 
-  const handleDelete = (event) =>{
-    let ID_STUDENt = parseInt(event.target.value)
-    axios.delete(`http://backendexample.sanbercloud.com/api/student-scores/${ID_STUDENt}`)
+  const handleEdit = async (event) => {
+    let updateId = parseInt (event.target.value)
+    const result = await axios.get(`http://backendexample.sanbercloud.com/api/student-scores/${updateId}`)
+    const {name, course, score, id:currentId} = result.data
+    setInput({name, course, score, currentId})
+  }
+
+  const handleDelete = (event) => {
+    let deleteId = parseInt (event.target.value)
+    axios.delete(`http://backendexample.sanbercloud.com/api/student-scores/${deleteId}`)
     .then(() => {
-      let newStudent = Student.filter(el=> {return el.id !== ID_STUDENt })
-      setStudent(newStudent)
+      let conditionalCurrentId = input.currentId === deleteId ? {currentId : null} : {}
+      setInput({...setInput, ...conditionalCurrentId})
+
+      //trigger fetch data in use effect for set scores 
+      setFetch(true)
     })
   }
 
@@ -108,7 +101,7 @@ const Student= () =>{
 
   return(
     <>
-      { Student !== null &&
+      { scores !== null &&
         (<div >
             <h1>Daftar Nilai Mahasiswa</h1>
             <table>
@@ -124,13 +117,13 @@ const Student= () =>{
                 </thead>
                 <tbody>
                     {
-                    Student.map((item, index)=>{
+                    scores.map((item, index)=>{
                         return(                    
                         <tr key={index}>
                             <td>{index+1}</td>
                             <td>{item.name}</td>
-                            <td>{item.mataKuliah}</td>
-                            <td>{item.nilai}</td>
+                            <td>{item.course}</td>
+                            <td>{item.score}</td>
                             <td>{getNilai(item.nilai)}</td>
                             <td>
                                 <button onClick={handleEdit} value={item.id}>Edit</button>
@@ -151,7 +144,7 @@ const Student= () =>{
                         Nama 
                         </div>          
                         <div className="col-75">
-                        <input type="text" name="name" onChange={handleChange} value={inputValue.name} required/>
+                        <input type="text" name="name" onChange={handleChange} value={input.name} required/>
                         </div>
                     </div>
                     <div className="row">
@@ -159,7 +152,7 @@ const Student= () =>{
                         Mata Kuliah
                         </div>          
                         <div className="col-75">
-                        <input type="text" name="course" onChange={handleChange} value={inputValue.course} required/>
+                        <input type="text" name="course" onChange={handleChange} value={input.course} required/>
                         </div> 
                     </div>
                     <div className="row">
@@ -167,7 +160,7 @@ const Student= () =>{
                         Nilai
                         </div>    
                         <div className="col-75">
-                        <input type="number" name="score" onChange={handleChange} value={inputValue.score} required min="0" max="100" />
+                        <input type="number" name="score" onChange={handleChange} value={input.score} required min="0" max="100" />
                         </div> 
                     </div>
                     <div className="row">   
@@ -177,7 +170,6 @@ const Student= () =>{
             </div>         
         </div>)
       }
-
     </>
   )
 }
