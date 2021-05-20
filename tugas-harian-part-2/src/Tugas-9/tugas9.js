@@ -4,7 +4,7 @@ import '../css/style.css';
 class IntroReactJS extends Component {
     render(){
         return(
-            <>
+            <div style={{textAlign:"center", paddingTop:"25px"}}>
                 <div className="Card">
                     <p className="Title">Form Pembelian Buah</p>
                     <form>
@@ -29,7 +29,7 @@ class IntroReactJS extends Component {
                         </div>
                     </form>
                 </div>
-            </>
+            </div>
         )
     }
 }

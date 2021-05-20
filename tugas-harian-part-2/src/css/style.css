@@ -1,17 +1,18 @@
 .Card{
     border: 1px solid rgb(172, 169, 169);
     border-radius:8px;
-    padding:40px;
+    padding:30px;
     width:50%;
     display:inline-block;
     font-family: 'Times New Roman', Times, serif;
     font-weight:bold;
+    text-align: left;
   }
 .Title{
-    text-align: center;
     font-weight:bold;
     font-size:30px;
-    margin: 30px 0px 40px;
+    text-align: center;
+    padding: 10px;
 }
 .row{
     border-radius: 5px;
@@ -19,12 +20,11 @@
 label{
     font-size: 20px;
     width: 25%;
-    padding: 12px 0px 12px 0;
     display: inline-block;
 }
 input{
     width: 40%;
-    padding: 7px;
+    padding: 10px;
     margin: 5px 0;
     border: 1px solid #000;
     border-radius: 4px;
@@ -32,6 +32,7 @@ input{
 }
 .button{
     display: inline-block;
+    margin-top: 20px;
     padding: 5px 10px;
     font-size: 13px;
     cursor: pointer;
@@ -40,33 +41,4 @@ input{
     border: 1;
     border-radius: 35px;
 }
-/* .tabel td,
-.tabel th {
-  border: 2px solid #ddd;
-  padding: 10px;
-}
-td {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #ff7f50;
-  color: black;
-}
-th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: grey;
-  color: black;
-}
 
-table.tabel {
-  margin-left: auto; 
-  margin-right: auto;
-  margin-bottom: 20px;
-  width: 50%;
-  font-family: 'Times New Roman', Times, serif;
-  color: #000;
-  border-collapse: collapse;
-  border: 5px solid white;
-} */
