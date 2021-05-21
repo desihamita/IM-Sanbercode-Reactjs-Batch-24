@@ -1,18 +1,18 @@
 .Card{
     border: 1px solid rgb(172, 169, 169);
     border-radius:8px;
-    padding:30px;
+    padding:40px;
     width:50%;
     display:inline-block;
+    text-align: left;
     font-family: 'Times New Roman', Times, serif;
     font-weight:bold;
-    text-align: left;
   }
 .Title{
+    text-align: center;
     font-weight:bold;
     font-size:30px;
-    text-align: center;
-    padding: 10px;
+    margin: 30px 0px 40px;
 }
 .row{
     border-radius: 5px;
@@ -20,11 +20,12 @@
 label{
     font-size: 20px;
     width: 25%;
+    padding: 12px 0px 12px 0;
     display: inline-block;
 }
 input{
     width: 40%;
-    padding: 10px;
+    padding: 7px;
     margin: 5px 0;
     border: 1px solid #000;
     border-radius: 4px;
@@ -32,7 +33,6 @@ input{
 }
 .button{
     display: inline-block;
-    margin-top: 20px;
     padding: 5px 10px;
     font-size: 13px;
     cursor: pointer;
@@ -41,4 +41,3 @@ input{
     border: 1;
     border-radius: 35px;
 }
-
