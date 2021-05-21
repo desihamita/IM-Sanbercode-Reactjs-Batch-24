@@ -1,15 +1,24 @@
-import React, {useState, useContext} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import {MahasiswaContext} from "./MahasiswaContext"
 import axios from "axios"
 import '../css/table.css'
 
 const MahasiswaForm = () =>{
-  const [Mahasiswa, , , setFetch, currentId, ] = useContext(MahasiswaContext)
+  const [Mahasiswa, setMahasiswa, , setFetch, currentId, ] = useContext(MahasiswaContext)
   const [inputValue, setInputValue] = useState({
     name : "",
     course : "",
     score : 0
   })
+
+  useEffect( ( ) => {
+    const fetchData = async ( ) => {
+      const result = await axios.get(`http://backendexample.sanbercloud.com/api/student-scores/${currentId}`)
+      const {name, course, score} = result.data
+      setInputValue({name, course, score})
+    }
+    fetchData()
+  },[currentId])
 
   const handleChange = (event) => {
     const value = event.target.value;
@@ -22,18 +31,29 @@ const MahasiswaForm = () =>{
 
   const handleSubmit = (event) =>{
     event.preventDefault()
+    const {name, course, score} = inputValue
+
     if (currentId === null){
       // untuk create data baru
-      axios.post(`http://backendexample.sanbercloud.com/api/student-scores`, inputValue)
-      .then(res => {
-          setFetch(true)
+      axios.post(`http://backendexample.sanbercloud.com/api/student-scores`, {name, course, score})
+      .then((res) => {
+          const data = res.data
+          //set score with local data
+          setMahasiswa([...Mahasiswa, {id: data.id, name, course, score}])
       })
     }else{
-        axios.put(`http://backendexample.sanbercloud.com/api/student-scores/${currentId}`, inputValue)
+        axios.put(`http://backendexample.sanbercloud.com/api/student-scores/${currentId}`, {name, course, score})
         .then(() => {
+            //trigger  fetch data 
             setFetch(true)
         })      
     }
+    setInputValue({
+      name: "",
+      course: "",
+      score: 0,
+      currentId: null
+    })
   }
 
   return(

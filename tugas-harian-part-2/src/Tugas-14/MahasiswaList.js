@@ -1,25 +1,20 @@
-import React, {useState, useContext, useEffect} from "react"
+import React, {useContext, useEffect} from "react"
 import {MahasiswaContext} from "./MahasiswaContext"
 import axios from "axios"
 import '../css/table.css'
 
 
 const MahasiswaList = () =>{
-  const [Mahasiswa, setMahasiswa, ,setFetch,, ] = useContext(MahasiswaContext)
-  const [, setInputValue] = useState({
-    name : "",
-    course : "",
-    score : 0
-  })
+  const [Mahasiswa, setMahasiswa, fetch, setFetch, currentId, setCurrentId] = useContext(MahasiswaContext)
 
   useEffect( ( ) => {
     const fetchData = async ( ) => {
       const result = await axios.get(`http://backendexample.sanbercloud.com/api/student-scores`)
 
       setMahasiswa(result.data.map(el => {
-        const {id, name, course, score} = el
-        return {id, name, course, score}
-      }))
+          const {id, name, course, score} = el
+          return {id, name, course, score}
+        }))
     }
     if(fetch){
       fetchData()
@@ -28,18 +23,19 @@ const MahasiswaList = () =>{
   },[fetch])
 
   const handleEdit = async (event) => {
-    let updateId = parseInt (event.target.value)
-    const result = await axios.get(`http://backendexample.sanbercloud.com/api/student-scores/${updateId}`)
-    const {name, course, score, id:currentId} = result.data
-    setInputValue({name, course, score, currentId})
+    let editId = parseInt (event.target.value)
+    setCurrentId(editId)
   }
 
   const handleDelete = (event) => {
-    let ID_STUDENt = parseInt(event.target.value)
-    axios.delete(`http://backendexample.sanbercloud.com/api/student-scores/${ID_STUDENt}`)
+    let deleteId = parseInt (event.target.value)
+    axios.delete(`http://backendexample.sanbercloud.com/api/student-scores/${deleteId}`)
     .then(() => {
-      let newMahasiswa = Mahasiswa.filter(el=> {return el.id !== ID_STUDENt })
-      setMahasiswa(newMahasiswa)
+      let conditionalCurrentId = currentId === deleteId ? {currentId : null} : {}
+      setCurrentId({...conditionalCurrentId})
+
+      //trigger fetch data in use effect for set scores 
+      setFetch(true)
     })
   }
 
@@ -63,10 +59,10 @@ const MahasiswaList = () =>{
 
    return(
     <>
-      { Mahasiswa !== null &&
+      { Mahasiswa!== null &&
         (
         <div>
-            <h1>Daftar Nilai Mahasiswa</h1>
+            <h1>Daftar Nilai student</h1>
             <table>
                 <thead>
                 <tr>

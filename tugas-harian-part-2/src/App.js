@@ -1,22 +1,21 @@
 import React from 'react'
-// import IntroReactJS from './Tugas-9/tugas9'
-// import TableBuah from './Tugas-10/tugas10'
-// import Timer from './Tugas-11/tugas11'
-// import Lists from './Tugas-12/tugas12'
-// import Student from './Tugas-13/tugas13'
-import Mahasiswa from './Tugas-14/Mahasiswa'
-
+// import tugas9 from './Tugas-9/tugas9'
+// import tugas10 from './Tugas-10/tugas10'
+// import tugas11 from './Tugas-11/tugas11'
+// import tugas12 from './Tugas-12/tugas12'
+// import tugas13 from './Tugas-13/tugas13'
+import Tugas14 from './Tugas-14/Mahasiswa'
 
 function App() {
   return (
     <div className="App">
       <>
-        {/* <IntroReactJS/>
-        <TableBuah />
-        <Timer start={5} />  */}
-         {/* <Lists /> */}
-        {/* <Student/> */}
-        <Mahasiswa />
+        {/* <tugas9/>
+        <tugas10 />
+        <tugas11 start={5} />
+        <tugas12 />
+        <tugas13/> */}
+        <Tugas14 />
       </>
     </div>
   );
