@@ -1,37 +1,23 @@
-import React from "react";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import Home from "../Component/Home"
-import Navbar from "../Component/Navbar"
-import Footer from "../Component/Footer"
-import About from "../Component/About"
-import Login from "../Component/login"
-import {ThemeProvider} from  "../Component/ThemeContext"
-import BookStore from "../Component/BookStore"
+import React from "react"
+import { BrowserRouter as Router } from "react-router-dom";
 
-export default function App() {
-  return (
-      <>
-        <Router>
-            <ThemeProvider>
-            <Navbar/>
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/About">
-                <About />
-              </Route>
-              <Route exact path="/BookStore" >
-                <Login />
-                <BookStore />
-              </Route>
-              <Route exact path="/Login">
-                <Login />
-              </Route>
-            </Switch>
-            <Footer />
-          </ThemeProvider>
-        </Router>    
-      </>
-  );
+import Header from "./Header"
+import Section from "./Section"
+import Footer from "./Footer"
+
+
+const Main = () =>{
+  return(
+    <>
+      <Router>
+        <div style={{backgroundImage: `url(${process.env.PUBLIC_URL}/img/pattern.jpg)`, paddingBottom: '20px'}}>
+          <Header/>
+          <Section/>
+          <Footer/>
+        </div>     
+      </Router>
+    </>
+  )
 }
+
+export default Main

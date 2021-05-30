@@ -1,12 +1,17 @@
-// import logo from './logo.svg';
-import Router from './Routes/router'
+import React from 'react';
+import Main from './Layouts/Main';
+import './App.css';
+import {UserProvider} from "./context/UserContext"
 
 function App() {
   return (
-    <div className="App">
-      <Router />
-    </div>
+    <>
+      <UserProvider>
+        <Main />
+      </UserProvider>
+    </>
   );
 }
 
 export default App;
+
