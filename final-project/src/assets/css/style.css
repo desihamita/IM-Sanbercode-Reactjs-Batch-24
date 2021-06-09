@@ -21,9 +21,11 @@
   float: right;
 }
 
- /* input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
-  font-size: 17px;
-  border: none;
-} */
+.image-Container{
+  position:relative;
+  transition: transform 0.2s;
+}
+.image-Container:hover{
+  cursor: pointer;
+  transform : scale(1.1);
+}

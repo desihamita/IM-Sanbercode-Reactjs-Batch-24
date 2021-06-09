@@ -1,10 +1,9 @@
-import React, {Component, useState, useEffect, useContext} from "react"
+import React, {useState, useEffect, useContext} from "react"
 import axios from "axios"
-import {useParams, useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import { Table, Button, Input } from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {UserContext} from "../../../Context/UserContext"
-const { Search } = Input;
 
 function onChange(pagination, filters, sorter, extra) {
   console.log('params', pagination, filters, sorter, extra);
@@ -15,7 +14,6 @@ function onChange(pagination, filters, sorter, extra) {
 const MovieList = () => {
   let history = useHistory()
   const [movie, setMovie] = useState([])
-  const [selectedId, setSelectedId]  =  useState(0)
   const [user,setUser] = useContext(UserContext)
   const [fetch, setFetch] = useState(true)
   const [search, setSearch] = useState("")
@@ -89,6 +87,8 @@ const MovieList = () => {
     history.push('/movie/create')
   }
 
+  
+
   const columns = [
     {
       title: 'title',
@@ -147,7 +147,7 @@ const MovieList = () => {
             <PlusOutlined />Add Data Movie
         </Button>
         <div>
-            <form className="form-search" style={{ margin: 10, float:"right" }}>
+            <form onSubmit={submitSearch} className="form-search" style={{ margin: 10, float:"right" }}>
               <input type="text" value={search} onChange={handleChangeSearch} />
               <button className="btn-info" >search</button>
             </form>

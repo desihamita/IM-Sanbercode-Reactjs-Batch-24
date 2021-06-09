@@ -11,8 +11,9 @@ import Login from "../pages/Login"
 import Register from "../pages/Register"
 import changePassword from "../pages/changePassword"
 
-import HomeMovie from "../pages/MovieHome"
-import HomeGame from "../pages/GameHome"
+import Movie from "../pages/MovieHome"
+import Game from "../pages/GameHome"
+import Home from "../pages/Home"
 
 import MovieList from "../pages/Movies/MovieList"
 import MovieForm from "../pages/Movies/MovieForm"
@@ -39,12 +40,13 @@ const Section = () => {
       return <Route {...rest}/>
     }
   }
-
+  
   return (
       <div>
         <Switch>
-          <Route exact path="/" component={HomeMovie}></Route>
-          <Route exact path="/Games" component={HomeGame}></Route>
+          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/movie" component={Movie}></Route>
+          <Route exact path="/game" component={Game}></Route>
 
           <LoginRoute exact path="/register" component={Register}></LoginRoute>
           <LoginRoute exact path="/login" component={Login}></LoginRoute>
@@ -58,6 +60,7 @@ const Section = () => {
           <Route exact path="/game" component={GameList}></Route>
           <Route exact path="/game/create" component={GameForm}></Route>
           <Route exact path="/game/edit/:id" component={GameForm}></Route>
+          <Route exact path="/game/details/:id" component={GameDetails}></Route>
         </Switch>
       </div>
   );

@@ -14,16 +14,10 @@ const Header = () => {
     }
     return (
         <Header className="site-layout-background" style={{ padding: 0 }}>
-            <Menu  mode="horizontal" style={{ marginLeft: "60%" }}>
-                <Menu.Item>
-                    <Link to="/">Movies</Link>
-                </Menu.Item>
-                <Menu.Item>
-                    <Link to="/Games">Games</Link>
-                </Menu.Item>
+            <Menu  theme="dark" mode="horizontal" defaultSelectedKeys={['4']} >
                 { user ?  
                     <>
-                    <Menu.Item>
+                    <Menu.Item style={{float:"right"}}>
                         <Button type="primary" shape="round" >
                             <div onClick={handleLogout} type="primary" shape="round" >logout</div>
                         </Button>
@@ -31,18 +25,27 @@ const Header = () => {
                     </>
                 :
                     <>
-                     <Menu.Item >
+                     <Menu.Item style={{float:"right"}}>
                         <Button type="primary" shape="round" >
                             <Link to="/login">Sing in</Link>
                         </Button>
                     </Menu.Item>
-                    <Menu.Item >
+                    <Menu.Item style={{float:"right"}}>
                         <Button type="primary" shape="round" >
                             <Link to="/register">Sing up</Link>
                         </Button>
                     </Menu.Item>
                     </>
                 }
+                <Menu.Item style={{float:"right"}}>
+                    <Link to="/game">Games</Link>
+                </Menu.Item>
+                <Menu.Item style={{float:"right"}}>
+                    <Link to="/movie">Movies</Link>
+                </Menu.Item>
+                <Menu.Item style={{float:"right"}}>
+                    <Link to="/">Home</Link>
+                </Menu.Item>
             </Menu>
         </Header>
     )

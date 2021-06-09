@@ -132,7 +132,7 @@ const GameList = () => {
   return (
     <>
     <div className="site-layout-background" style={{ padding: 24 }}>
-      <h1 style={{textAlign:"center", fontSize:"30px"}}>Data Movie</h1>
+      <h1 style={{textAlign:"center", fontSize:"30px"}}>Data Game</h1>
       <div>
         <Button onClick={createNewData} type="primary" style={{ margin: 20, float:"left" }}>
             <PlusOutlined />Add Data Movie
