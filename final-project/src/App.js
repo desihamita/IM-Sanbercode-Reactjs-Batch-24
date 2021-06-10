@@ -1,4 +1,5 @@
 import React from 'react'
+import {BrowserRouter as Router} from "react-router-dom"
 import './App.css'
 import 'antd/dist/antd.css'
 import Main from "./Components/layouts/Main"
@@ -8,7 +9,9 @@ function App() {
   return (
     <>
        <UserProvider>
-        <Main/>
+         <Router>
+           <Main/>
+         </Router>
       </UserProvider>
     </>
   );

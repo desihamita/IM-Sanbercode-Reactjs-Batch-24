@@ -25,14 +25,6 @@ import GameDetails from "../pages/Games/GameDetails"
 
 const Section = () => {
   const [user] = useContext(UserContext)
-  const PrivateRoute = ({...rest}) =>{
-    if (user){
-      return <Route {...rest}/>
-    }else{
-      return <Redirect to="/login" />
-    }
-  }
-
   const LoginRoute = ({...rest}) =>{
     if (user){
       return <Redirect to="/" />
@@ -44,7 +36,9 @@ const Section = () => {
   return (
       <div>
         <Switch>
-          <Route exact path="/" component={Home}></Route>
+          <Route exact path="/" >
+            <Home />
+          </Route>
           <Route exact path="/movie" component={Movie}></Route>
           <Route exact path="/game" component={Game}></Route>
 
@@ -52,15 +46,15 @@ const Section = () => {
           <LoginRoute exact path="/login" component={Login}></LoginRoute>
           <Route exact path="/changePassword" component={changePassword}></Route>
 
-          <Route exact path="/movie" component={MovieList}></Route>
-          <Route exact path="/movie/create" component={MovieForm}></Route>
-          <Route exact path="/movie/edit/:id" component={MovieForm}></Route>
-          <Route exact path="/movie/details/:id" component={MovieDetails}></Route>
+          <Route exact path="/movie-data" component={MovieList}></Route>
+          <Route exact path="/movie-data/create" component={MovieForm}></Route>
+          <Route exact path="/movie-data/edit/:id" component={MovieForm}></Route>
+          <Route exact path="/movie-data/details/:id" component={MovieDetails}></Route>
 
-          <Route exact path="/game" component={GameList}></Route>
-          <Route exact path="/game/create" component={GameForm}></Route>
-          <Route exact path="/game/edit/:id" component={GameForm}></Route>
-          <Route exact path="/game/details/:id" component={GameDetails}></Route>
+          <Route exact path="/game-data" component={GameList}></Route>
+          <Route exact path="/game-data/create" component={GameForm}></Route>
+          <Route exact path="/game-data/edit/:id" component={GameForm}></Route>
+          <Route exact path="/game-data/details/:id" component={GameDetails}></Route>
         </Switch>
       </div>
   );

@@ -82,12 +82,9 @@ const MovieList = () => {
     setSearch(e.target.value)
   }
 
-
   const createNewData = ()=>{
     history.push('/movie/create')
   }
-
-  
 
   const columns = [
     {
@@ -130,7 +127,7 @@ const MovieList = () => {
       key: 'action',
       render: (item) => (
         <>
-          <Button onClick={()=> { history.push(`/movie/edit/${item.id}`)}} value={item.id}>Edit</Button>
+          <Button onClick={()=> { history.push(`/movie-data/edit/${item.id}`)}} value={item.id}>Edit</Button>
           <Button onClick={handleDelete} value={item.id}>Delete</Button>
         </>
       ),
