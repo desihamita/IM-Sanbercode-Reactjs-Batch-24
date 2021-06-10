@@ -25,11 +25,11 @@ const GameDetails = () => {
     return (
         <>
         <div className="site-layout-background" style={{ padding: 24}}>
-            <div className="site-card-wrapper" style={{paddingLeft: 200}}>
+            <div className="site-card-wrapper" style={{ marginLeft: 80}}>
                 <Row gutter={16}>
                 <Col span={2} key={game.id}>
                     <Card style={{ width: 900 }}>
-                        <img alt="example" style={{float:"left", margin:"20px", marginRight: 30}} src={game.image_url} />
+                        <img alt="example" style={{float:"left", margin:"20px", marginRight: 30, width:300, height:400}} src={game.image_url} />
                         <div >
                             <p style={{fontSize:"25px", marginTop: 19}}><strong>Judul : </strong> {game.name}</p>
 
@@ -43,7 +43,7 @@ const GameDetails = () => {
 
                             <p style={{fontSize:"20px"}}><strong>Release : </strong> {game.release}</p>
 
-                            <p style={{fontSize:"20px"}}><Link to={`/game`}>Kembali</Link></p>
+                            <p style={{fontSize:"20px", float:"right"}}><Link to={`/game`}>Kembali</Link></p>
                         </div>
                     </Card>
                 </Col>

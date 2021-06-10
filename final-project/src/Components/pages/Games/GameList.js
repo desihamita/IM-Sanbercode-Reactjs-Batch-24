@@ -4,13 +4,12 @@ import { useHistory} from "react-router-dom"
 import { Table, Button, Input } from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {UserContext} from "../../../Context/UserContext"
-
+const { Search } = Input;
 
 const GameList = () => {
   let history = useHistory()
   const [game, setGame] = useState([])
-  const [selectedId, setSelectedId]  =  useState(0)
-  const [user,setUser] = useContext(UserContext)
+  const [user,] = useContext(UserContext)
   const [fetch, setFetch] = useState(true)
   const [search, setSearch] = useState("")
     
@@ -44,7 +43,7 @@ const GameList = () => {
 
   const handleDelete = (event) =>{
     let idGame = parseInt(event.target.value)
-    axios.delete(`https://backendexample.sanbersy.com/api/data-contestant/${idGame}`, {headers: {"Authorization" : "Bearer "+ user.token}})
+    axios.delete(`https://backendexample.sanbersy.com/api/data-game/${idGame}`, {headers: {"Authorization" : "Bearer "+ user.token}})
     .then(() => {
       let newGame = game.filter(el=> {return el.id !== idGame})
       setGame(newGame)
@@ -53,36 +52,30 @@ const GameList = () => {
     })
   }
 
-  const submitSearch = (e) =>{
-    e.preventDefault()
+  const onSearch = (value, event) => {
+    event.preventDefault()
     axios.get(`https://backendexample.sanbersy.com/api/data-game`)
     .then(res => {
-      let resBooks = res.data.map(el=>{ return {
+      let resGame = res.data.map(el=>{ return {
         id: el.id,
-        key: el.id,
-        name: el.name, 
-        genre: el.genre, 
-        singlePlayer: el.singlePlayer, 
-        multiplayer: el.multiplayer, 
-        platform: el.platform, 
-        release: el.release, 
-        image_url: el.iamge_url
+            key: el.id,
+            name: el.name, 
+            genre: el.genre, 
+            singlePlayer: el.singlePlayer, 
+            multiplayer: el.multiplayer, 
+            platform: el.platform, 
+            release: el.release, 
+            image_url: el.iamge_url
       }
       })
 
-      let filteredBooks = resBooks.filter(x=> x.title.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-      setGame([...filteredBooks])
+      let filteredGame = resGame.filter(x=> x.name.toLowerCase().indexOf(value.toLowerCase()) !== -1)
+      setGame([...filteredGame])
     })
- 
   }
-
-  const handleChangeSearch = (e)=>{
-    setSearch(e.target.value)
-  }
-
 
   const createNewData = ()=>{
-    history.push('/game/create')
+    history.push('/game-data/create')
   }
 
   const columns = [
@@ -121,8 +114,8 @@ const GameList = () => {
       key: 'action',
       render: (item) => (
         <>
-          <Button onClick={()=> { history.push(`/game/edit/${item.id}`)}} value={item.id}>Edit</Button>
-          <Button onClick={handleDelete} value={item.id}>Delete</Button>
+          <Button onClick={()=> { history.push(`/game-data/edit/${item.id}`)}} value={item.id}>Edit</Button>
+          <button onClick={handleDelete} value={item.id}>Delete</button>
         </>
       ),
     },
@@ -133,16 +126,11 @@ const GameList = () => {
     <>
     <div className="site-layout-background" style={{ padding: 24 }}>
       <h1 style={{textAlign:"center", fontSize:"30px"}}>Data Game</h1>
-      <div>
-        <Button onClick={createNewData} type="primary" style={{ margin: 20, float:"left" }}>
-            <PlusOutlined />Add Data Movie
-        </Button>
         <div>
-            <form onSubmit={submitSearch} className="form-search" style={{ margin: 10, float:"right" }}>
-              <input type="text" value={search} onChange={handleChangeSearch} />
-              <button className="btn-info" >search</button>
-            </form>
-          </div>
+        <Button onClick={createNewData} type="primary" style={{ margin: 20, float:"left" }}>
+            <PlusOutlined />Add Data Game
+        </Button>
+        <Search placeholder="input search text" onSearch={onSearch} enterButton style={{width:"350px", padding: 24, float:"right" }} />
         </div>
       <Table dataSource={game} columns={columns} scroll={{ x: 1300 }} onChange={onChangeTable} />
     </div>

@@ -81,7 +81,7 @@ const MovieHome = () => {
                         className="image-Container"
                       >
                         <Meta title={item.title}  />
-                        <Link to={`/movie/details/${item.id}`}>Detail</Link>
+                        <Link to={`/movie-data/details/${item.id}`}>Detail</Link>
                       </Card>
                     </Col>
                   </>

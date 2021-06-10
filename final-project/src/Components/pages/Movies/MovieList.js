@@ -4,19 +4,14 @@ import {useHistory} from "react-router-dom"
 import { Table, Button, Input } from 'antd';
 import {PlusOutlined} from '@ant-design/icons';
 import {UserContext} from "../../../Context/UserContext"
-
-function onChange(pagination, filters, sorter, extra) {
-  console.log('params', pagination, filters, sorter, extra);
-}
-
-// ReactDOM.render(<Table columns={columns} dataSource={data} onChange={onChange} />, mountNode);
+const { Search } = Input;
 
 const MovieList = () => {
   let history = useHistory()
   const [movie, setMovie] = useState([])
   const [user,setUser] = useContext(UserContext)
   const [fetch, setFetch] = useState(true)
-  const [search, setSearch] = useState("")
+  let token = user ?  user.token : null
     
   useEffect(()=>{
     const fetchData = async ()=>{
@@ -44,21 +39,23 @@ const MovieList = () => {
   },[fetch])
 
   const handleDelete = (event) =>{
-    let idPeserta = parseInt(event.target.value)
-    axios.delete(`https://backendexample.sanbersy.com/api/data-contestant/${idPeserta}`, {headers: {"Authorization" : "Bearer "+ user.token}})
+    let id = parseInt(event.target.value)
+    console.log(id)
+    axios.delete(`https://backendexample.sanbersy.com/api/data-movie/${id}`, {headers: {"Authorization" : "Bearer "+ token}})
     .then(() => {
-      let newPesertaLomba = movie.filter(el=> {return el.id !== idPeserta})
-      setMovie(newPesertaLomba)
+      let newMovie = movie.filter(el=> {return el.id !== id})
+      setMovie(newMovie)
+      alert("Berhasil DiHapus!")
     }).catch((err)=>{
       alert(JSON.stringify(err.response.data))
     })
   }
 
-  const submitSearch = (e) =>{
-    e.preventDefault()
+  const onSearch = (value, event) => {
+    event.preventDefault()
     axios.get(`https://backendexample.sanbersy.com/api/data-movie`)
     .then(res => {
-      let resBooks = res.data.map(el=>{ return {
+      let resMovie = res.data.map(el=>{ return {
         id: el.id,
         key: el.id,
         title: el.title, 
@@ -72,18 +69,13 @@ const MovieList = () => {
       }
       })
 
-      let filteredBooks = resBooks.filter(x=> x.title.toLowerCase().indexOf(search.toLowerCase()) !== -1)
-      setMovie([...filteredBooks])
+      let filteredMovie = resMovie.filter(x=> x.title.toLowerCase().indexOf(value.toLowerCase()) !== -1)
+      setMovie([...filteredMovie])
     })
- 
-  }
-
-  const handleChangeSearch = (e)=>{
-    setSearch(e.target.value)
   }
 
   const createNewData = ()=>{
-    history.push('/movie/create')
+    history.push('/movie-data/create')
   }
 
   const columns = [
@@ -127,7 +119,7 @@ const MovieList = () => {
       key: 'action',
       render: (item) => (
         <>
-          <Button onClick={()=> { history.push(`/movie-data/edit/${item.id}`)}} value={item.id}>Edit</Button>
+          <Button onClick={()=> { history.push(`/movie-data/edit/${item.id}`)}} >Edit</Button>
           <Button onClick={handleDelete} value={item.id}>Delete</Button>
         </>
       ),
@@ -143,13 +135,8 @@ const MovieList = () => {
         <Button onClick={createNewData} type="primary" style={{ margin: 20, float:"left" }}>
             <PlusOutlined />Add Data Movie
         </Button>
-        <div>
-            <form onSubmit={submitSearch} className="form-search" style={{ margin: 10, float:"right" }}>
-              <input type="text" value={search} onChange={handleChangeSearch} />
-              <button className="btn-info" >search</button>
-            </form>
-          </div>
-        </div>
+        <Search placeholder="input search text" onSearch={onSearch} enterButton style={{width:"350px", padding: 24, float:"right" }} />
+      </div>
       <Table dataSource={movie} columns={columns} scroll={{ x: 1300 }} />
     </div>
     </>
